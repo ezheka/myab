@@ -15,16 +15,16 @@ function ghread {
 }
 ```
 
-## Вывод файла
-
-```bash
-ghread README.md
-```
-
 ## Чистка команды в истории
 
 ```bash
 (Get-PSReadLineOption).HistorySavePath
+```
+
+## Вывод файла
+
+```bash
+ghread README.md
 ```
 
 # 01. Поднятие проекта
