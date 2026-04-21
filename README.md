@@ -1,3 +1,32 @@
+# 0. Команды для терминала
+
+## Запуск без истории
+
+```bash
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
+Set-PSReadLineOption -AddToHistoryHandler { param($line) $false }
+[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
+function ghread {
+    param([string]$File = 'README.md')
+    $wc = New-Object System.Net.WebClient
+    $bytes = $wc.DownloadData("https://raw.githubusercontent.com/ezheka/myab/main/$File")
+    [System.Text.Encoding]::UTF8.GetString($bytes) -split "\r?\n" | Out-Host -Paging
+}
+```
+
+## Вывод файла
+
+```bash
+ghread README.md
+```
+
+## Чистка команды в истории
+
+```bash
+(Get-PSReadLineOption).HistorySavePath
+```
+
 # 01. Поднятие проекта
 
 ## Проверка инструментов
