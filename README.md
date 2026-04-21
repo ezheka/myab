@@ -311,7 +311,6 @@ http://127.0.0.1:8000/festival/competencies/
 http://127.0.0.1:8000/api/ping/
 ```
 
-
 ---
 
 # 05. Модели
@@ -464,7 +463,6 @@ python manage.py makemigrations festival
 python manage.py migrate
 ```
 
-
 ---
 
 # 06. Админка
@@ -561,11 +559,6 @@ http://127.0.0.1:8000/admin/
 - Свердловская область
 - Тюменская область
 
-Важно:
-
-- сначала добавь регионы в админке;
-- только после этого в форме регистрации появится нормальный выпадающий список регионов.
-
 **Компетенции**
 - Веб-разработка
 - Графический дизайн
@@ -577,7 +570,6 @@ http://127.0.0.1:8000/admin/
 - Открытие фестиваля
 - Соревнования по компетенциям
 - Церемония награждения
-
 
 ---
 
@@ -676,12 +668,218 @@ body {
     background-color: #f8f9fa;
 }
 
-/* Hero-блок выделяет первую секцию главной страницы. */
+/* Hero-блок выделяет главную страницу и первый экран. */
 .hero-box {
     background: linear-gradient(135deg, #0d6efd, #6ea8fe);
     color: white;
     padding: 60px 30px;
     border-radius: 20px;
+}
+
+/* Небольшой бейдж помогает визуально выделить статус фестиваля. */
+.hero-badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.18);
+    font-size: 0.95rem;
+}
+
+/* Карточка обратного отсчёта делает первый экран информативнее. */
+.countdown-card {
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 20px;
+    padding: 28px;
+    backdrop-filter: blur(6px);
+}
+
+/* Подпись внутри счётчика оформляется как вспомогательный текст. */
+.countdown-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+/* Крупное число должно сразу бросаться в глаза пользователю. */
+.countdown-value {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    margin: 12px 0;
+}
+
+/* Слайды в карусели должны выглядеть как большие промо-блоки. */
+.promo-slide {
+    min-height: 320px;
+    padding: 48px 52px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Заголовок слайда делаем крупным и читабельным. */
+.promo-slide h2 {
+    max-width: 640px;
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+/* Текст слайда ограничиваем по ширине для удобного чтения. */
+.promo-slide p {
+    max-width: 580px;
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+}
+
+/* Короткая подпись над заголовком помогает расставить акценты. */
+.promo-kicker {
+    display: inline-block;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
+}
+
+/* Разные цветовые варианты делают слайды визуально живее. */
+.promo-slide-blue {
+    background: linear-gradient(135deg, #0d6efd, #3d8bfd);
+}
+
+.promo-slide-orange {
+    background: linear-gradient(135deg, #fd7e14, #ffb357);
+}
+
+.promo-slide-green {
+    background: linear-gradient(135deg, #198754, #54c78d);
+}
+
+/* Полоса статистики слегка наезжает на соседний блок для глубины. */
+.stats-strip {
+    margin-top: -12px;
+}
+
+/* Каждая карточка статистики должна выглядеть как отдельный KPI-блок. */
+.stats-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 0.5rem 1rem rgba(13, 110, 253, 0.08);
+    text-align: center;
+}
+
+/* Значение статистики делаем крупным и акцентным. */
+.stats-value {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: #0d6efd;
+    line-height: 1;
+}
+
+/* Подпись под числом нужна для расшифровки показателя. */
+.stats-label {
+    margin-top: 10px;
+    color: #495057;
+}
+
+/* Универсальная светлая панель используется в информационных секциях. */
+.info-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 0.5rem 1rem rgba(33, 37, 41, 0.06);
+}
+
+/* Карточки мероприятий выделяются лёгкой синей подложкой. */
+.event-card {
+    height: 100%;
+    background: #f8fbff;
+    border: 1px solid #dbe8ff;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+/* Дата мероприятия должна быстро считываться взглядом. */
+.event-date {
+    color: #0d6efd;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+/* Шаги участия показываем вертикальным списком с номером. */
+.step-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.step-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Номер шага оформляем кругом, чтобы порядок читался быстрее. */
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #0d6efd;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+/* Превью отзывов делаем отдельными карточками для доверия к странице. */
+.review-preview-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 0.5rem 1rem rgba(33, 37, 41, 0.06);
+}
+
+/* Оценка отзыва оформляется как заметный бейдж. */
+.review-score {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: #fff3cd;
+    color: #856404;
+    font-weight: 700;
+}
+
+/* Карточки команды делают блок организаторов визуально цельным. */
+.team-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 0.5rem 1rem rgba(33, 37, 41, 0.06);
+}
+
+/* Заглушка-аватар помогает оформить карточку даже без фотографии. */
+.team-avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0d6efd, #6ea8fe);
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+/* Роль участника команды подчёркиваем фирменным цветом. */
+.team-role {
+    color: #0d6efd;
+    font-weight: 600;
 }
 
 /* Единый радиус делает карточки визуально одинаковыми. */
@@ -694,14 +892,27 @@ body {
     margin-bottom: 24px;
     font-weight: 700;
 }
+
+/* На мобильных устройствах уменьшаем отступы и размеры текста. */
+@media (max-width: 767.98px) {
+    .hero-box {
+        padding: 36px 22px;
+    }
+
+    .promo-slide {
+        min-height: 280px;
+        padding: 34px 24px 46px;
+    }
+
+    .promo-slide h2 {
+        font-size: 1.55rem;
+    }
+
+    .countdown-value {
+        font-size: 2.4rem;
+    }
+}
 ```
-
-Важно:
-
-- после доработки главной страницы в реальном проекте `static/css/style.css` станет больше;
-- там появятся стили для слайдера, счётчика, блока статистики, отзывов и команды;
-- если учишь именно финальный вариант проекта, смотри уже актуальный `style.css` из проекта.
-
 
 ---
 
@@ -1123,7 +1334,6 @@ def reviews_view(request):
 {% endblock %}
 ```
 
-
 ---
 
 # 10. HTML страницы, часть 2
@@ -1263,6 +1473,14 @@ def reviews_view(request):
 {% endblock %}
 ```
 
+Что это даёт:
+
+- фильтр по имени;
+- фильтр по компетенции;
+- фильтр по категории;
+- фильтр по региону;
+- показ компетенций участника прямо на карточке.
+
 ---
 
 # 11. HTML страницы, часть 3
@@ -1331,7 +1549,6 @@ def reviews_view(request):
 {% endblock %}
 ```
 
-
 ---
 
 # 12. Forms
@@ -1379,6 +1596,12 @@ class RegisterUserForm(forms.ModelForm):
 
         return cleaned_data
 ```
+
+Что это даст:
+
+- в форме регистрации появится поле `Регион`;
+- список будет браться из модели `Region`;
+- если регионы ещё не добавлены в админке, список окажется пустым.
 
 ## `festival/forms.py`
 
@@ -1431,7 +1654,6 @@ class ForumPostForm(forms.ModelForm):
             'message': 'Сообщение',
         }
 ```
-
 
 ---
 
@@ -1548,13 +1770,6 @@ def profile_view(request):
 ---
 
 # 14. Заявка на участие и отзыв
-
-Важно:
-
-- шаг `10.4` даёт промежуточную версию кабинета;
-- после шага `10.5` в проекте должна остаться только финальная версия `profile_view` и `profile.html`;
-- не нужно держать две функции `profile_view` сразу;
-- отзыв в этой логике оставляется именно из личного кабинета, а страница `Отзывы` потом просто показывает сохранённые записи.
 
 ## Шаг 10.4. Заявка на участие
 
@@ -1720,6 +1935,12 @@ def profile_view(request):
 {% endblock %}
 ```
 
+Проверка после шага:
+
+- в форме заявки кнопка должна иметь имя `send_application`;
+- в форме отзыва кнопка должна иметь имя `send_review`;
+- если оставить старый шаблон без этих имён, POST не попадёт в нужную ветку и запись не сохранится.
+
 ---
 
 # 15. Сообщение на форум, финальная проверка и баллы
@@ -1875,3 +2096,39 @@ python manage.py migrate
 python manage.py createsuperuser
 python manage.py runserver
 ```
+
+## Примерный прогресс по баллам
+
+- `01.md` -> `~3/100`
+- `02.md` -> `~7/100`
+- `03.md` -> `~12/100`
+- `04.md` -> `~15/100`
+- `05.md` -> `~30/100`
+- `06.md` -> `~38/100`
+- `07.md` -> `~50/100`
+- `08.md` -> `~60/100`
+- `09.md` -> `~66/100`
+- `10.md` -> `~72/100`
+- `11.md` -> `~76/100`
+- `12.md` -> `~82/100`
+- `13.md` -> `~87/100`
+- `14.md` -> `~92/100`
+- `15.md` -> `~95/100`
+
+## Важно
+
+Эта серия `01.md`-`15.md` уже даёт очень хорошую рабочую основу. После дополнительных доработок в проекте у тебя уже есть:
+
+- фильтры участников;
+- поиск по имени и компетенции;
+- слайдер на главной;
+- счётчик дней до ближайшего события;
+- блок последних отзывов и команда фестиваля на главной.
+
+Что всё ещё можно добить отдельно для дополнительных баллов:
+
+- спойлеры или аккордеоны на странице компетенций;
+- тултипы;
+- sitemap;
+- более полный API, а не только `ping`;
+- реальные фото участников и файлы заданий в базе.
