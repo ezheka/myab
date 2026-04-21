@@ -1,0 +1,125 @@
+# 0. Команды для терминала
+
+## Windows PowerShell
+
+### Запуск без истории
+
+```powershell
+Set-PSReadLineOption -HistorySaveStyle SaveNothing
+Set-PSReadLineOption -AddToHistoryHandler { param($line) $false }
+[Microsoft.PowerShell.PSConsoleReadLine]::ClearHistory()
+
+function ghread {
+    param([string]$File = 'README.md')
+    $wc = New-Object System.Net.WebClient
+    $bytes = $wc.DownloadData("https://raw.githubusercontent.com/ezheka/myab/main/$File")
+    [System.Text.Encoding]::UTF8.GetString($bytes) -split "\r?\n" | Out-Host -Paging
+}
+```
+
+### Чистка команды в истории
+
+```powershell
+(Get-PSReadLineOption).HistorySavePath
+```
+
+### Вывод файла
+
+```powershell
+ghread README.md
+ghread 01.md
+```
+
+### Скачать файл
+
+```powershell
+$wc = New-Object System.Net.WebClient
+$wc.DownloadFile("https://raw.githubusercontent.com/ezheka/myab/main/README.md", ".\\README.md")
+```
+
+### Скачать файл короткой командой
+
+```powershell
+function ghsave {
+    param(
+        [string]$File = 'README.md',
+        [string]$OutFile = $File
+    )
+
+    $wc = New-Object System.Net.WebClient
+    $wc.DownloadFile("https://raw.githubusercontent.com/ezheka/myab/main/$File", $OutFile)
+}
+```
+
+```powershell
+ghsave README.md
+ghsave 01.md 01.md
+```
+
+### Полностью удалить файл без корзины
+
+```powershell
+Remove-Item -LiteralPath .\README.md -Force
+```
+
+### Если уже отправил в корзину через проводник
+
+```powershell
+Clear-RecycleBin -Force
+```
+
+## Astra Linux / bash
+
+### Отдельная сессия без истории
+
+```bash
+HISTFILE=/dev/null bash --noprofile --norc
+set +o history
+history -c
+```
+
+### Функция для вывода файла
+
+```bash
+ghread() {
+    local file="${1:-README.md}"
+    curl -LfsS "https://raw.githubusercontent.com/ezheka/myab/main/$file" | less
+}
+```
+
+### Вывод файла
+
+```bash
+ghread README.md
+ghread 01.md
+```
+
+### Если нет curl
+
+```bash
+wget -qO- https://raw.githubusercontent.com/ezheka/myab/main/README.md | less
+```
+
+### Скачать файл
+
+```bash
+curl -LfsS -o README.md https://raw.githubusercontent.com/ezheka/myab/main/README.md
+```
+
+### Скачать другой файл
+
+```bash
+curl -LfsS -o 01.md https://raw.githubusercontent.com/ezheka/myab/main/01.md
+```
+
+### Полностью удалить файл без корзины
+
+```bash
+rm -f README.md
+```
+
+### Если файл уже попал в корзину графической оболочки
+
+```bash
+gio trash --empty
+```
